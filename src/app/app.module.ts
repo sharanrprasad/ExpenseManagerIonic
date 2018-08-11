@@ -18,6 +18,8 @@ import { UserProvider } from '../providers/user/user';
 import {AddExpensePage} from "../pages/add-expense/add-expense";
 import { ExpenseProvider } from '../providers/expense/expense';
 import { CategoryProvider } from '../providers/category/category';
+import { SummaryProvider } from '../providers/summary/summary';
+import {SummaryPage} from "../pages/summary/summary";
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { CategoryProvider } from '../providers/category/category';
     SignupPage,
     AddExpensePage,
     BudgetPage,
+    SummaryPage
   ],
   imports: [
     HttpClientModule,
@@ -44,13 +47,15 @@ import { CategoryProvider } from '../providers/category/category';
     TabsPage,
     LoginPage,
     SignupPage,
-    AddExpensePage
+    AddExpensePage,
+    SummaryPage
   ],
   providers: [
     UserProvider,
     ExpenseProvider,
     LoginProvider,
     CategoryProvider,
+    SummaryProvider,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
