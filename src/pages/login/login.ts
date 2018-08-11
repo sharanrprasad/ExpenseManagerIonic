@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import {SignupPage} from "../signup/signup";
 import {UserProvider} from "../../providers/user/user";
 import * as Utils from '../../Utils';
+import {TabsPage} from "../tabs/tabs";
 
 @Component({
   selector: 'page-login',
@@ -22,8 +23,8 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, public userProvider:UserProvider) {
     this.loginData = {
-      email:"",
-      password:""
+      email:"s@g.com",
+      password:"123456"
     }
     this.errorMessage = "";
   }
@@ -51,7 +52,7 @@ export class LoginPage {
   saveandNavigateToHome(user:UserSignUpModel){
     this.userProvider.setUserData(user.user);
     Utils.setToken( user.token);
-    this.navCtrl.push(SignupPage);
+    this.navCtrl.push(TabsPage);
   }
 
   gotoSignup(){

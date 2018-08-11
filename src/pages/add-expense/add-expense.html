@@ -1,0 +1,51 @@
+<!--
+  Generated template for the AddExpensePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>AddExpense</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="addExpenseAndGoToHome()">
+    <ion-item>
+      <ion-label>Price</ion-label>
+      <ion-input type="number" required [(ngModel)]="expenseData.price"  name="price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Payment Method</ion-label>
+      <ion-select [(ngModel)]="expenseData.paymentMethod" name="paymentMethod" multiple="false" cancelText="Nah" okText="Okay!">
+        <ion-option value=0 selected="true">Cash</ion-option>
+        <ion-option value=1>Check</ion-option>
+        <ion-option value=2>Credit Card</ion-option>
+        <ion-option value=3>Debit Card</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select required [(ngModel)]="expenseData.expenseCategoryId"  name="category">
+        <ion-option *ngFor="let category of categories" [value]="category.expenseCategoryId">{{category.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime required displayFormat="MMM DD YYYY" pickerFormat="MMM DD YYYY" [(ngModel)]="expenseData.expenseDate"  name="date"></ion-datetime>
+    </ion-item>
+
+    <button ion-button type="submit" block>Add Expense </button>
+  </form>
+
+  <ion-item>
+    <ion-label>{{errorMessage}}</ion-label>
+  </ion-item>
+
+</ion-content>

@@ -5,13 +5,44 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+
+    <ion-grid>
+      <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>From</ion-label>
+          <ion-datetime required displayFormat="YYYY MM DD" pickerFormat="YYYY MM DD" [(ngModel)]="fromDate"  name="date"></ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item>
+          <ion-label>To</ion-label>
+          <ion-datetime required displayFormat="YYYY MM DD" pickerFormat="YYYY MM DD" [(ngModel)]="toDate"  name="toDate"></ion-datetime>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-buttons end >
+          <button right ion-button (click)="getExpenses()">Get Expenses</button>
+        </ion-buttons>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  <ion-card *ngFor="let expense of expenses">
+    <ion-card-header>{{categoryProvider.categoriesMap[expense.exenseCategoryId].name}}</ion-card-header>
+    <ion-card-content>
+      <p>Cost - {{expense.price}}</p>
+      <p>{{expense.expenseDate}} </p>
+    <button ion-item right bottom (click)="deleteExpense(expense)">
+      <ion-icon name="trash"></ion-icon>
+    </button>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-fab right bottom>
+    <button ion-fab color="light" (click)="gotoAddExpensePage()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>
