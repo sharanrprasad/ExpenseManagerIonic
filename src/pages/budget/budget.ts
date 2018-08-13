@@ -20,7 +20,7 @@ export class BudgetPage {
     this.isBudgetDataAvilable = false;
   }
 
-  ionViewDidLoad(){
+  ionViewDidEnter(){
     this.budgetProvider.getCurrentBudget(this.userProvider.user.userId).subscribe(data => {
         this.currentBudget = data;
         this.isBudgetDataAvilable = true;
