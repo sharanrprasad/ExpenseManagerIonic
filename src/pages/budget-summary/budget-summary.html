@@ -19,9 +19,14 @@
     <ion-item>
       <ion-icon name="leaf" item-start></ion-icon>
       Balance
-      <ion-badge item-end>
+      <ion-badge *ngIf="isBalanceBelow; else normalBalance" item-end color="danger">
         {{budgetModel.money - summaryData.totalExpenditure}}
       </ion-badge>
+      <ng-template #normalBalance>
+        <ion-badge  item-end color="danger">
+          {{budgetModel.money - summaryData.totalExpenditure}}
+        </ion-badge>
+      </ng-template>
     </ion-item>
 
     <ion-item *ngFor="let spendingCat of summaryData.expenditureCategoryList">

@@ -16,12 +16,13 @@ export class BudgetSummaryPage {
   summaryData : SummaryModel;
   isDataAvilable : boolean;
   doughChart: any;
+  isBalanceBelow: boolean;
   @ViewChild('doughnutCanvas') doughCanvas;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public summaryProvider: SummaryProvider, public  loadingCtrl:LoadingController,public toastCtrl:ToastController) {
     this.budgetModel = this.navParams.get('data');
     this.isDataAvilable = false;
-
+    this.isBalanceBelow = false;
   }
 
   ionViewDidLoad(){
@@ -59,10 +60,13 @@ export class BudgetSummaryPage {
     let categoriesArray = this.summaryData.expenditureCategoryList.map(cat =>{
       return cat.expenseCategory.name
     });
-    categoriesArray.push("balance");
-    console.log(categoriesArray);
     let dataArray = this.summaryData.expenditureCategoryList.map(cat => cat.categoryExpenditure);
-    dataArray.push(balance);
+    if(balance >= 0) {
+      categoriesArray.push("balance");
+      dataArray.push(balance);
+      this.isBalanceBelow = true
+
+    }
     let colorsArray = dataArray.map(data => this.dynamicColors());
 
     this.doughChart = new Chart(this.doughCanvas.nativeElement, {
