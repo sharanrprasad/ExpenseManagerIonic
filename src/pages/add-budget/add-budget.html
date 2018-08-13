@@ -1,0 +1,47 @@
+<!--
+  Generated template for the AddBudgetPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+    <ion-title>
+      Add/Edit Budget
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form (ngSubmit)="addOrUpdateBudget()">
+    <ion-item>
+      <ion-label>Money</ion-label>
+      <ion-input type="number" required [(ngModel)]="budgetModel.money"  name="price"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>From Date</ion-label>
+      <ion-datetime required displayFormat="MMM DD YYYY" pickerFormat="MMM DD YYYY" [(ngModel)]="budgetModel.fromDate"  name="date"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>To Date</ion-label>
+      <ion-datetime required displayFormat="MMM DD YYYY" pickerFormat="MMM DD YYYY" [(ngModel)]="budgetModel.toDate"  name="date"></ion-datetime>
+    </ion-item>
+
+    <button *ngIf="isEditing; else AddBudget"  ion-button type="submit" block>Edit Budget </button>
+
+    <ng-template #AddBudget>
+      <button ion-button type="submit" block>Add Budget </button>
+    </ng-template>
+  </form>
+</ion-content>

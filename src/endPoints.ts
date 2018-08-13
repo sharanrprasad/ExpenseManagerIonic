@@ -6,5 +6,8 @@ export const DeleteExpenseUrl = BaseUrl + "/expense/";
 export const GetExpenses = BaseUrl+ "/expense/user/";
 export const GetCategories = BaseUrl+ "/category/";
 export const GetSummaryUrl = BaseUrl + "/summary/bydate";
-
+export const GetCurrentBudgetUrl = BaseUrl + "/budget/current/";
+export const UpdateBudgetUrl = BaseUrl + "/budget/update/";
+export const DeleteBudgetUrl = BaseUrl + "/budget/delete/"
+export const AddBudgetUrl =  BaseUrl + "/budget/add/";
 
