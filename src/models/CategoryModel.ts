@@ -1,5 +1,5 @@
 export default  class CategoryModel {
-     exenseCategoryId:number
+     expenseCategoryId:number
       name: string
       parentId:string
       userId:string

@@ -17,6 +17,7 @@ export class HomePage {
   public fromDate:Date;
   public toDate:Date;
   public expenses: Array<ExpenseModel>;
+  public categoryMap : any
 
   constructor(public navCtrl: NavController, public categoryProvider: CategoryProvider, public toastCtrl: ToastController, public loadingCtrl: LoadingController,
               public expenseProvider:ExpenseProvider, public userProvider:UserProvider) {
@@ -32,7 +33,8 @@ export class HomePage {
     });
     loader.present();
     this.categoryProvider.fetchAllCategories().subscribe(next => {
-
+      this.categoryMap = next;
+      console.log(this.categoryMap);
     },error1 => {
       this.toastCtrl.create({
         message: 'Failed to fetch data',
@@ -93,6 +95,11 @@ export class HomePage {
        err => {
        this.addToastErrorMessage("Something broke");
        })
+  }
+
+  getCategoryName(categoryId):string{
+    console.log("Categories - ", this.categoryProvider.categoriesMap);
+    return this.categoryMap[categoryId].name;
   }
 
 

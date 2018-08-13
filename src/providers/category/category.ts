@@ -6,12 +6,7 @@ import * as endPoints from "../../endPoints";
 import {UserProvider} from "../user/user";
 import {getHttpJsonHeader} from "../../Utils";
 
-/*
-  Generated class for the CategoryProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class CategoryProvider {
 
@@ -31,11 +26,13 @@ export class CategoryProvider {
           observer.complete();
         }else{
             this.http.get<Array<CategoryModel>>(endPoints.GetCategories+this.userProvider.user.userId,{
-              headers:getHttpJsonHeader()
+              headers:getHttpJsonHeader(),
+              observe:'response'
             }).subscribe(data => {
-              this.categories = data;
+
+              this.categories =  data.body;
               this.categoriesMap = this.mapCategoies(this.categories);
-              observer.next(this.categories);
+              observer.next(this.categoriesMap);
               observer.complete();
             },
               error => {
@@ -51,11 +48,17 @@ export class CategoryProvider {
     return this.categories;
   }
 
-  private mapCategoies(categories:Array<CategoryModel>):any{
-   return categories.reduce((previousValue,currentValue,index,array)=> {
-     previousValue[currentValue.exenseCategoryId] = currentValue;
-      return previousValue;
-    }, {});
+  private mapCategoies(cate:Array<CategoryModel>):any{
+
+    const returnObj = cate.reduce((previousValue,currentValue,index,array)=> {
+     if(currentValue.expenseCategoryId) {
+       previousValue[currentValue.expenseCategoryId.toString()] = currentValue;
+     }
+     return previousValue;
+    },{});
+
+    return returnObj;
+
   }
 
 
