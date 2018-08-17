@@ -4,4 +4,9 @@ export default  class CategoryModel {
       parentId:string
       userId:string
       childCategories?:Array<CategoryModel>
+
+  constructor(){
+       this.name= "";
+       this.parentId = null;
+  }
 }

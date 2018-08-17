@@ -1,6 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="goToAddCategory()">Add Category</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -28,6 +31,7 @@
       </ion-col>
       </ion-row>
     </ion-grid>
+  <ion-label align="center" margin="20"  >{{searchExpenseTitle}}</ion-label>
   <ion-list [virtualScroll] = "expenses" >
     <ion-card *virtualItem="let expense" >
       <ion-card-header>{{getCategoryName(expense.expenseCategoryId)}}</ion-card-header>

@@ -23,6 +23,7 @@ import {SummaryPage} from "../pages/summary/summary";
 import { BudgetProvider } from '../providers/budget/budget';
 import {AddBudgetPage} from "../pages/add-budget/add-budget";
 import {BudgetSummaryPage} from "../pages/budget-summary/budget-summary";
+import {AddCategoryPage} from "../pages/add-category/add-category";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {BudgetSummaryPage} from "../pages/budget-summary/budget-summary";
     BudgetPage,
     SummaryPage,
     AddBudgetPage,
-    BudgetSummaryPage
+    BudgetSummaryPage,
+    AddCategoryPage
   ],
   imports: [
     HttpClientModule,
@@ -55,7 +57,8 @@ import {BudgetSummaryPage} from "../pages/budget-summary/budget-summary";
     AddExpensePage,
     SummaryPage,
     AddBudgetPage,
-    BudgetSummaryPage
+    BudgetSummaryPage,
+    AddCategoryPage,
   ],
   providers: [
     UserProvider,

@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import * as endPoints from "../../endPoints";
 import {UserProvider} from "../user/user";
 import {getHttpJsonHeader} from "../../Utils";
+import * as utils from "../../Utils";
 
 
 @Injectable()
@@ -21,10 +22,6 @@ export class CategoryProvider {
 
   fetchAllCategories(): Observable<Array<CategoryModel>>{
     return Observable.create(observer => {
-        if(this.categories != null && this.categories.length > 0){
-           observer.next(this.categories);
-          observer.complete();
-        }else{
             this.http.get<Array<CategoryModel>>(endPoints.GetCategories+this.userProvider.user.userId,{
               headers:getHttpJsonHeader(),
               observe:'response'
@@ -40,7 +37,6 @@ export class CategoryProvider {
                 observer.error(error.status);
                 observer.complete();
               });
-        }
     });
   }
 
@@ -59,6 +55,15 @@ export class CategoryProvider {
 
     return returnObj;
 
+  }
+
+
+  public addParentCateogry(data: CategoryModel):Observable<CategoryModel>{
+    const headerObj = utils.getHttpJsonHeader();
+    return this.http.post<CategoryModel>(endPoints.AddCategoryParent, data, {
+      headers : headerObj
+      }
+    );
   }
 
 

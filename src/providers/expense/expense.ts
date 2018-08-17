@@ -47,4 +47,12 @@ export class ExpenseProvider {
       });
   }
 
+
+  getTopExpenses(userId:string) : Observable<Array<ExpenseModel>> {
+    let headerObj = utils.getHttpJsonHeader();
+    return this.http.get<Array<ExpenseModel>> (  endPoints.GetExpensesTop+userId, {
+      headers: headerObj
+    });
+  }
+
 }

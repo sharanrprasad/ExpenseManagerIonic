@@ -15,16 +15,22 @@ export class AddExpensePage {
   public expenseData:ExpenseModel;
   public categories :  Array<CategoryModel>;
   public errorMessage:string;
+  public reloadHome : boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoryProvider:CategoryProvider, public loadingCtrl: LoadingController, public expenseProvider: ExpenseProvider,
              public userProvider: UserProvider) {
     this.expenseData = new ExpenseModel();
     this.errorMessage = "";
+    this.reloadHome = false;
   }
 
   ionViewDidLoad(){
     this.categories = this.categoryProvider.getAllCategories();
     console.log("This Category l ", this.categories);
+  }
+
+  ionViewDidEnter(){
+    this.categories = this.categoryProvider.getAllCategories();
   }
 
   addExpenseAndGoToHome(){
@@ -36,6 +42,7 @@ export class AddExpensePage {
       this.expenseProvider.addExpense(this.expenseData).subscribe(
         next => {
           loader.dismissAll();
+          this.reloadHome = true;
           this.navCtrl.pop();
         }, error => {
           this.errorMessage = "Something went wrong";
@@ -43,9 +50,15 @@ export class AddExpensePage {
         }
       )
     });
-
-
   }
+
+  ionViewWillLeave() {
+    if(this.reloadHome) {
+      console.log("Added Expense to Home");
+      this.navCtrl.getPrevious().data.reloadView = true;
+    }
+  }
+
 
 
 
