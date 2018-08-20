@@ -23,8 +23,8 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, public userProvider:UserProvider) {
     this.loginData = {
-      email:"s@g.com",
-      password:"123456"
+      email:"",
+      password:""
     }
     this.errorMessage = "";
   }

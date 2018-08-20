@@ -1,4 +1,7 @@
+
 export const BaseUrl:string = "https://localhost:5001/api";
+
+//export const BaseUrl:string = "https://10.0.2.2:5001/api";
 export  const LoginUrl = BaseUrl + "/login";
 export const  SignUpUrl = BaseUrl+ "/signup";
 export const AddExpenseUrl = BaseUrl + "/expense/add/";

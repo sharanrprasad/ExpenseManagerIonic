@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {LoginPage} from "../login/login";
 import UserModel from "../../models/UserModel";
 import {LoginProvider} from "../../providers/login/login";
@@ -19,11 +19,17 @@ export class SignupPage {
   userData:UserModel;
   errorMessage:string
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider:LoginProvider,public userProvider:UserProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider:LoginProvider,public userProvider:UserProvider, public loadingCtrl:LoadingController) {
     this.userData = new UserModel();
   }
 
   signupUser(){
+
+    const loader = this.loadingCtrl.create({
+      content: "Loading...",
+    });
+    loader.present();
+
     this.loginProvider.signupUser(this.userData).subscribe((res :HttpResponse<UserSignUpModel|ErrorModel<Object>>) => {
       switch (res.status) {
         case 200 :
@@ -36,7 +42,9 @@ export class SignupPage {
     },
     error1 => {
       this.setErrorMessage("Bad request try again");
-    })
+    }, () => {
+        loader.dismissAll();
+      })
 }
   setErrorMessage(message:string){
     this.errorMessage = message;
